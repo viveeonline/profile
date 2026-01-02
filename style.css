@@ -107,14 +107,9 @@ main {
     gap: 12px;
 }
 
-/* --- THE FIX IS HERE --- */
-/* This explicitly tells the browser to treat the SVG as an image */
 .card h2 svg {
     flex-shrink: 0;
-    display: inline-block;
-    vertical-align: middle;
 }
-/* ------------------------ */
 
 .card p {
     font-size: 1rem;
@@ -174,11 +169,3 @@ main {
 #contact {
     text-align: center;
 }
-
-footer {
-    text-align: center;
-    padding: 40px 24px;
-    color: #828282;
-    font-size: 0.9rem;
-}
-
