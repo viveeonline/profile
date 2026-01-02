@@ -1,117 +1,158 @@
-/* General Body & Font Styling */
+/* --- General Setup & Fonts --- */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
     margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-    color: #333;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #F7F7F7;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hero Header Section -*/
+/* --- Hero Header Section --- */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
-    color: #fff;
+    color: white;
+    padding: 80px 24px;
     text-align: center;
-    padding: 100px 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
+    position: relative;
+    min-height: 400px;
+    overflow: hidden; /* Prevents blur from spilling out */
 }
 
+/* Blurred Background Image Layer */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -10px; left: -10px; right: -10px; bottom: -10px; /* Stretch to avoid blurry edges */
+    background-image: url('https://d33wubrfki0l68.cloudfront.net/daacb72f170756757c374345377150259d3a7786/c34b1/assets/images/default-hero.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px); /* The blur effect */
+    z-index: 1;
+}
+
+/* Dark Overlay Layer */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* The semi-transparent black overlay */
+    z-index: 2;
+}
+
+/* The actual text content, placed above the overlays */
 .hero-content {
+    position: relative;
+    z-index: 3;
     max-width: 800px;
 }
 
 .hero h1 {
-    font-size: 3.5em;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
-    margin: 0 0 10px 0;
+    line-height: 1.1;
+    margin: 0;
 }
 
 .hero p {
-    font-size: 1.5em;
-    font-weight: 300;
-    margin-bottom: 30px;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    margin: 16px 0 32px 0;
+    opacity: 0.9;
+    max-width: 600px; /* Constrains the paragraph width */
 }
 
-/* Call-to-Action Button Styling */
 .cta-button {
-    font-size: 1em;
-    font-weight: 600;
-    color: #fff;
-    background-color: #007BFF;
-    padding: 15px 30px;
+    background-color: #6A63E3;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-block; /* Needed for transform */
 }
 
 .cta-button:hover {
-    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Main Content & Sections */
+/* --- Main Content Layout & Card Styling --- */
 main {
+    padding: 48px 24px;
     max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
+    margin: 0 auto;
 }
 
-section {
-    margin-bottom: 50px;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #eee;
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* The subtle card shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-h2 {
-    font-size: 2.2em;
-    font-weight: 600;
-    color: #0056b3;
-    border-bottom: 2px solid #007BFF;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+.card:hover {
+    transform: translateY(-5px); /* The card lift effect */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* The enhanced shadow on hover */
 }
 
-/* Expertise Grid */
+.card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+}
+
+.card p, .card li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #4f4f4f;
+}
+
+/* --- Specific Sections --- */
+#overview p {
+    margin: 0;
+}
+
 .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .expertise-item {
-    background-color: #e9f5ff;
-    color: #0056b3;
-    padding: 15px;
-    border-radius: 5px;
-    text-align: center;
+    background-color: #E8E7FA;
+    color: #6A63E3;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     font-weight: 500;
 }
 
-/* Career Journey (Experience) */
 .job {
-    margin-bottom: 30px;
-    border-left: 3px solid #007BFF;
-    padding-left: 20px;
+    border: none; /* Remove the old border */
+    padding: 0; /* Remove old padding */
+    margin-bottom: 32px;
 }
-
 .job:last-child {
     margin-bottom: 0;
 }
 
 .job h3 {
-    font-size: 1.4em;
-    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
 }
 
 .job-duration {
-    font-style: italic;
-    color: #777;
-    margin-bottom: 10px;
+    color: #828282;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
 }
 
 .job ul {
@@ -123,35 +164,14 @@ h2 {
     margin-bottom: 8px;
 }
 
-/* Education Section */
-.education-item p {
-    margin: 10px 0;
-    font-size: 1.1em;
-}
-
-/* Contact Section */
 #contact {
     text-align: center;
-    background-color: #0056b3;
-    color: #fff;
-}
-#contact h2 {
-    color: #fff;
-    border-bottom: 2px solid #fff;
-}
-#contact .cta-button {
-    background-color: #fff;
-    color: #0056b3;
-}
-#contact .cta-button:hover {
-    background-color: #eee;
 }
 
-
-/* Footer */
+/* --- Footer --- */
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: #fff;
+    padding: 40px 24px;
+    color: #828282;
+    font-size: 0.9rem;
 }
